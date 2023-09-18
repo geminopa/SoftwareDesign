@@ -1,0 +1,21 @@
+<!-- 現在時刻のタイムスタンプを表示する部分 -->
+<div id="time"></div>
+<!-- 同期処理タスクを実行するボタン -->
+<button onclick="sendRequest()">処理開始</button>
+<script>
+    // タイムスタンプを更新するタスク
+    setInterval(() => time.innerText = Date.now());
+
+    const onLoad = () => {
+        console.log("通信完了");
+    }
+    // 少なくとも１秒かかる同期処理タスク
+    const sendRequest = () => {
+        const request = new XMLHttpRequest();
+        const url = "https://httpbin.org/delay/1";
+        request.open("GET", url);
+        // コールバック関数をrequestオブジェクトに渡す
+        request.onload = onLoad;
+        request.send();
+    }
+</script>
